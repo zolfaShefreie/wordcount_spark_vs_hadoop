@@ -20,4 +20,5 @@ if __name__ == "__main__":
     text_rdd = sparkContent.textFile(file_paths[0])
     words = text_rdd.flatMap(lambda line: line.split(" ")).filter(lambda x: x.strip())
     words = words.map(delete_punctuation).map(lambda x: x.lower())
-    words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b).collect()
+    result = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b)
+    print(result.collect())
