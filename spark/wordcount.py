@@ -30,11 +30,12 @@ if __name__ == "__main__":
     # sparkContent = SparkContext(conf=conf)
     spark = SparkSession.builder.appName("wordcount_sh").getOrCreate()
     sparkContent = spark.sparkContext
-    
+
     text_rdd = sparkContent.textFile(input_path)
     start_time = time.time()
     print("start map-reduceing")
     words = text_rdd.flatMap(lambda line: line.split(" ")).filter(lambda x: x.strip())
     words = words.map(delete_punctuation).map(lambda x: x.lower())
-    words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b).saveAsTextFile(output_path)
+    result = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b)
+    result.saveAsTextFile(output_path)
     print(f"done in: {time.time() - start_time}(seconds) ")
