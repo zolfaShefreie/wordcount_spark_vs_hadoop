@@ -16,7 +16,6 @@ def delete_punctuation(x):
 if __name__ == "__main__":
     # conf = SparkConf().setAppName("app_sh")
     # sparkContent = SparkContext(conf=conf)
-    i = input('type sth')
     spark = SparkSession.builder.appName("wordcount_sh").getOrCreate()
     sparkContent = spark.sparkContext
     text_rdd = sparkContent.textFile(file_paths[0])
