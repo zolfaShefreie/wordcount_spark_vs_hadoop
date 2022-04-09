@@ -2,7 +2,7 @@ from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 
 
-file_paths = ['hdfs:/user/ebrahimi/file1G.txt', 'hdfs:/user/ebrahimi/file5G.txt', 'hdfs:/user/ebrahimi/file10G.txt']
+file_paths = ['hdfs:/user/zolfa_shefreie/test.txt', 'hdfs:/user/ebrahimi/file1G.txt', 'hdfs:/user/ebrahimi/file5G.txt', 'hdfs:/user/ebrahimi/file10G.txt']
 
 
 def delete_punctuation(x):
