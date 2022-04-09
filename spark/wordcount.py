@@ -1,8 +1,9 @@
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
+import time
 
 
-file_paths = ['hdfs:/user/zolfa_shefreie/test.txt', 'hdfs:/user/ebrahimi/file1G.txt', 'hdfs:/user/ebrahimi/file5G.txt', 'hdfs:/user/ebrahimi/file10G.txt']
+file_paths = ['hdfs:/user/ebrahimi/file1G.txt', 'hdfs:/user/ebrahimi/file5G.txt', 'hdfs:/user/ebrahimi/file10G.txt']
 
 
 def delete_punctuation(x):
@@ -18,7 +19,9 @@ if __name__ == "__main__":
     spark = SparkSession.builder.appName("wordcount_sh").getOrCreate()
     sparkContent = spark.sparkContext
     text_rdd = sparkContent.textFile(file_paths[0])
+    start_time = time.time()
+    print("start map-reduceing")
     words = text_rdd.flatMap(lambda line: line.split(" ")).filter(lambda x: x.strip())
     words = words.map(delete_punctuation).map(lambda x: x.lower())
     result = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b)
-    print(result.collect())
+    print(f"done in: {time.time() - start_time}(s) ")
