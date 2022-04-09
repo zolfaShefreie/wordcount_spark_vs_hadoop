@@ -1,4 +1,5 @@
 from pyspark import SparkContext, SparkConf
+from pyspark.sql import SparkSession
 
 
 file_paths = ['hdfs:/user/ebrahimi/file1G.txt', 'hdfs:/user/ebrahimi/file5G.txt', 'hdfs:/user/ebrahimi/file10G.txt']
@@ -12,8 +13,10 @@ def delete_punctuation(x):
 
 
 if __name__ == "__main__":
-    conf = SparkConf().setAppName("app_sh")
-    sparkContent = SparkContext(conf=conf)
+    # conf = SparkConf().setAppName("app_sh")
+    # sparkContent = SparkContext(conf=conf)
+    spark = SparkSession.builder.appName("wordcount_sh").getOrCreate()
+    sparkContent = spark.sparkContext
     text_rdd = sparkContent.textFile(file_paths[0])
     words = text_rdd.flatMap(lambda line: line.split(" ")).filter(lambda x: x.strip())
     words = words.map(delete_punctuation).map(lambda x: x.lower())
