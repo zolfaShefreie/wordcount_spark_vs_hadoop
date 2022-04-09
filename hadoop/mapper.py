@@ -3,12 +3,12 @@
 import sys
 import re
 import os
-from stopword_list import stopwords
+# from stopword_list import stopwords
 
 
 class TextCleaner:
     punc = '''!()-[]{.};:'"\,<>/?@#$%^&*_~`|’“”…—–'''
-    removed_plus = stopwords
+    # removed_plus = stopwords
 
     @classmethod
     def run(cls, text: str) -> list:
@@ -30,7 +30,8 @@ class TextCleaner:
         Returns:
             list: tokens
         """
-        stop_words = cls.removed_plus
+        # stop_words = cls.removed_plus
+        stop_words = list()
         tokens = text.split()
         return [token.strip() for token in tokens if token.strip() and token.strip() not in stop_words]
 
