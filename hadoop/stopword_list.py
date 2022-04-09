@@ -1,4 +1,5 @@
-
+#!/usr/bin/env python
+# -*-coding:utf-8 -*
 
 stopwords = ['significantly', 'wasn', 'bottom', 'higher', 'won', 'cs', 'fully', 'points', 'msie', 'ourselves', 'nor',
              'thorough', 'upon', 'up', 'minus', 'tv', 'case', 'respectively', 'thanks', 'second', 'many', 'out', 'finds',
