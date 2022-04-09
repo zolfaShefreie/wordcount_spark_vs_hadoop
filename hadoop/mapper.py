@@ -3,7 +3,7 @@
 import sys
 import re
 import os
-from stopword_list import stopwords
+# from stopword_list import stopwords
 
 
 class TextCleaner:
