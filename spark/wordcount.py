@@ -36,6 +36,6 @@ if __name__ == "__main__":
     print("start map-reduce actions")
     words = text_rdd.flatMap(lambda line: line.split(" ")).filter(lambda x: x.strip())
     words = words.map(delete_punctuation).map(lambda x: x.lower())
-    result = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b)
+    result = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a+b).sortBy(lambda a: a[1])
     print(f"map-reduce actions done in: {time.time() - start_time}(seconds) ")
     result.saveAsTextFile(output_path)
